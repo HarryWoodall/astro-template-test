@@ -31,6 +31,7 @@ export interface Collection {
  */
 export interface GalleryImage {
 	path: string;
+	thumbnail?: string;
 	meta: Meta;
 	exif?: ImageExif;
 }

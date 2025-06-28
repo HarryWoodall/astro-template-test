@@ -37,7 +37,7 @@ const builtInCollections = [featuredCollectionId];
  * @property {string} [sortBy] - Property to sort images by (e.g., 'captureDate')
  * @property {'asc' | 'desc'} [order] - Sort order, either ascending or descending
  */
-interface GetImagesOptions {
+export interface GetImagesOptions {
 	galleryPath?: string;
 	collection?: string;
 	sortBy?: 'captureDate';
@@ -54,6 +54,7 @@ interface GetImagesOptions {
  * @throws {ImageStoreError} Throws an error if loading the gallery data fails.
  */
 export const getImages = async (options: GetImagesOptions = {}): Promise<Image[]> => {
+	// getExternalImages();
 	const { galleryPath = defaultGalleryPath, collection } = options;
 	try {
 		let images = (await loadGalleryData(galleryPath)).images;
@@ -67,7 +68,7 @@ export const getImages = async (options: GetImagesOptions = {}): Promise<Image[]
 	}
 };
 
-function getErrorMsgFrom(error: unknown) {
+export function getErrorMsgFrom(error: unknown) {
 	return error instanceof Error ? error.message : 'Unknown error';
 }
 
@@ -88,7 +89,7 @@ const loadGalleryData = async (galleryPath: string): Promise<GalleryData> => {
 	}
 };
 
-function filterImagesByCollection(collection: string | undefined, images: GalleryImage[]) {
+export function filterImagesByCollection(collection: string | undefined, images: GalleryImage[]) {
 	if (collection) {
 		images = images.filter((image) => image.meta.collections.includes(collection));
 	}
@@ -107,7 +108,7 @@ function validateGalleryData(gallery: GalleryData) {
 	}
 }
 
-function sortImages(images: GalleryImage[], options: GetImagesOptions) {
+export function sortImages(images: GalleryImage[], options: GetImagesOptions) {
 	const { sortBy, order } = options;
 	let result: GalleryImage[] = images;
 	if (sortBy) {
@@ -173,4 +174,26 @@ export const getCollections = async (
 	galleryPath: string = defaultGalleryPath,
 ): Promise<Collection[]> => {
 	return (await loadGalleryData(galleryPath)).collections;
+};
+
+export type ImageListResponse = {
+	resources: Array<{
+		asset_id: string;
+		public_id: string;
+		version: number;
+		format: string;
+		width: number;
+		height: number;
+		type: string;
+		created_at: string;
+		context?: {
+			custom: {
+				alt: string;
+				caption: string;
+			};
+		};
+		asset_folder: string;
+		resource_type: string;
+	}>;
+	updated_at: string;
 };

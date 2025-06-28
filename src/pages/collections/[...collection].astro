@@ -1,24 +1,32 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import PhotoGrid from '../../components/PhotoGrid.astro';
-import { getCollections, getImages } from '../../data/imageStore';
+// import { getCollections } from '../../data/imageStore';
+// import { getImages } from '../../data/repositories/cloudinaryRepository';
+import { getImages, getCollections } from '../../data/repositories/immichRepository';
+import { featuredCollectionId } from '../../data/imageStore';
 
 const allCollection = {
 	id: undefined,
 	name: 'All',
 };
-const collections = [allCollection, ...(await getCollections())];
+
+export const prerender = false;
+
+const collections = [allCollection, ...(await getCollections([featuredCollectionId]))];
 const { collection } = Astro.params;
 const images = await getImages(collection ? { collection } : {});
 const base = import.meta.env.BASE_URL;
 
-export const getStaticPaths = async () => {
-	return [{ id: undefined }, ...(await getCollections())].map((collection) => {
-		return {
-			params: { collection: collection.id },
-		};
-	});
-};
+// export const getStaticPaths = async () => {
+// 	return [{ id: undefined }, ...(await getCollections([featuredCollectionId]))].map(
+// 		(collection) => {
+// 			return {
+// 				params: { collection: collection.id },
+// 			};
+// 		},
+// 	);
+// };
 ---
 
 <MainLayout>
