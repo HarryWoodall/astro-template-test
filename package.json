@@ -42,6 +42,7 @@
 		"vitest": "^3.1.1"
 	},
 	"dependencies": {
+		"@astrojs/netlify": "^6.4.0",
 		"@cloudinary/url-gen": "^1.21.0",
 		"@types/mime-types": "^3.0.1",
 		"mime-types": "^3.0.1"
