@@ -1,0 +1,20 @@
+name: Deploy Astro site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: withastro/action@v2
+        with:
+          path: .
+          node-version: 20
+          deploy-branch: gh-pages
+          build-dir: dist
