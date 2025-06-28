@@ -5,7 +5,6 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://chic-selkie-7c8e5c.netlify.app/',
 	base: '/',
 	output: 'static',
 
