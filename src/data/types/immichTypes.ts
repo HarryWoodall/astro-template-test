@@ -147,3 +147,9 @@ export type SharedKeysResponse = Array<{
 	allowDownload: boolean;
 	showMetadata: boolean;
 }>;
+
+export type Album = {
+	name: string;
+	id: string;
+	shareKey: string | undefined;
+};
