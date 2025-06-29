@@ -1,9 +1,9 @@
 ---
 import PhotoGrid from './PhotoGrid.astro';
 import { featuredCollectionId } from '../data/imageStore';
-import ImmichRepository from '../data/repositories/ImmichRepository';
+import ImmichService from '../data/repositories/ImmichService';
 
-const repo = new ImmichRepository(featuredCollectionId);
+const repo = new ImmichService(featuredCollectionId);
 await repo.preload();
 const images = repo.getImages();
 ---

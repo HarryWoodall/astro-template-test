@@ -11,7 +11,7 @@ import mime from 'mime-types';
 import { getErrorMsgFrom, ImageStoreError, sortImages, type GetImagesOptions } from '../imageStore';
 import type { ImageInputFormat } from 'astro';
 
-export default class ImmichRepository {
+export default class ImmichService {
 	private albumPrefix = 'public_';
 	private baseUrl = import.meta.env.PUBLIC_IMMICH_BASE_URL;
 	private collection: string | undefined;

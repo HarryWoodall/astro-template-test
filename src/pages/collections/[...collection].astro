@@ -2,7 +2,7 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import PhotoGrid from '../../components/PhotoGrid.astro';
 import { featuredCollectionId } from '../../data/imageStore';
-import ImmichRepository from '../../data/repositories/ImmichRepository.ts';
+import ImmichService from '../../data/repositories/ImmichService';
 
 const allCollection = {
 	id: undefined,
@@ -12,7 +12,7 @@ const allCollection = {
 export const prerender = false;
 
 const { collection } = Astro.params;
-const repo = new ImmichRepository(collection);
+const repo = new ImmichService(collection);
 await repo.preload();
 
 const collections = [allCollection, ...repo.getCollections([featuredCollectionId])];
